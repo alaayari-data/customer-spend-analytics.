@@ -2,7 +2,7 @@
 
 A Python pipeline and Power BI dashboard analysing 2,216 customers across 8 markets to show who spends the most, where they are, and how they respond to campaigns.
 
-![Dashboard](images/dashboard.png)
+
 
 ## Business context and objective
 
@@ -18,46 +18,40 @@ A retailer wants to know which customers and markets create the most value so it
 
 ## Insights
 
-1. **Overall performance:** 2,216 customers spent 1,345,279 in total, or 607 per customer on average. Only 15% accepted the latest campaign, so most of the audience is not responding.
-2. **Markets:** Europe accounts for 54% of spend, and Spain alone is roughly half of the total. South Africa (about 0.21M) and Canada (about 0.17M) follow. Mexico is negligible, so its results should not be over-read.
-3. **Income:** average spend climbs from 72 for customers under 30k to 1,575 for customers above 90k, about 22x higher. Income is the strongest signal of customer value in this data.
-4. **Household size:** customers with no children spend 1,105 on average, about 4.5x more than customers with two children (247). Households with children spend far less at every level.
-5. **Products:** wine makes up about half of all spend and meat about 28%, so two categories carry most of the revenue.
+1. **Overall performance:** A total of 2,216 customers spent 1,345,279, which averages to 607 per customer. 15% Of the audience accepted the latest campaign. This shows that most customers are not responding to the campaign.
+
+2. **Markets:** Europe makes up 54% of the spend. Spain alone accounts for half of the total spending. South Africa contributes around 0.21 million. Canada around 0.17 million. Mexico has a low contribution. Its results are not meaningful. Should not be overinterpreted.
+
+3. **Income:** The average spend varies greatly by income. Customers earning under 30k spend 72 on average. Those earning above 90k spend 1,575, which's about 22 times more. Income is clearly the indicator of customer value in this data.
+
+4. **Household size:** Customers with no children spend 1,105 on average. This is 4.5 times higher than customers with two children, who spend 247. Households with children spend less regardless of income level.
+
+5. **Products:** Wine accounts for about half of all spending and meat makes up about 28%. These two product categories together carry most of the revenue.
 
 ## Recommendations
 
-- Prioritise high-income households without children when targeting campaigns.
-- Investigate the low 15% response rate by testing different offers per segment before increasing campaign spend.
-- Before shifting budget between markets, compare average spend per customer, not only total spend, because Spain's lead may reflect the number of customers as much as their value.
+- Focus on high-income households that do not have children when planning campaigns. These customers show the spending levels.
+
+- Look into why 15% of customers responded. Test offers for each customer segment before increasing the campaign budget.
+
+- When considering shifting budget between markets compare spend per customer instead of just total spend. Spain’s lead may come from having customers rather than higher spending, per customer.
 
 ## Data
 
 - **Source:** Kaggle marketing dataset with a `Country` column (`marketing_data.csv`).
+
 - **Files produced:** `cleaned_marketing_data.csv` (customers) and `country_reference.csv` (region, currency and population per country).
-- **Cleaning:** removes missing income values, converts dates, drops implausible birth years, groups junk marital-status values as "Unknown", and maps the dataset's country codes to ISO codes.
+
+- **Cleaning:** removes missing income values converts dates, drops birth years groups junk marital-status values as "Unknown" and maps the datasets country codes, to ISO codes.
 
 ## Pipeline
 
-Load the CSV, clean it, engineer features (`Total_Spend`, `Age_Group`), enrich each country through the REST Countries API, save both outputs, then load them into Power BI.
+Load the CSV clean it engineer features (`Total_Spend` `Age_Group`) enrich each country through the REST Countries API save both outputs then load them into Power BI.
 
 ## Data model
 
 `Dim_Country` (one) to `Fact_Customers` (many) on country code, single-direction filter.
 
-## How to run
-
-1. Clone the repository and create a virtual environment.
-2. Install the dependencies with `pip install -r requirements.txt`.
-3. Download the dataset from Kaggle into `data/raw/`.
-4. Copy `.env.example` to `.env` and add your REST Countries API key.
-5. Run `python main.py`.
-6. Open the Power BI file and refresh the data.
-
-## Limitations
-
-- The data comes from a public Kaggle dataset and the currency of spend is not stated.
-- The results show what goes with higher spend, not what causes it.
-- Some markets have very few customers, so their averages are unreliable.
 
 ## Tech stack
 
