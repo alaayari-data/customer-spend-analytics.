@@ -38,7 +38,7 @@ A retailer wants to know which customers and markets create the most value so it
 
 ## Data
 
-- **Source:** Kaggle marketing dataset with a `Country` column (`marketing_data.csv`).
+- **Source:** [Kaggle marketing dataset](https://www.kaggle.com/datasets/emmetbrown/marketing-data) with a `Country` column (`marketing_data.csv`).
 
 - **Files produced:** `cleaned_marketing_data.csv` (customers) and `country_reference.csv` (region, currency and population per country).
 
